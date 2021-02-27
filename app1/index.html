@@ -30,15 +30,15 @@
 
     <div class="vz-mobile vz-mobile-top">
     <select id="vz-scene-select" style="width: 150px; height: 30px;">
-      <option value="1"> scene a </option>
-      <option value="2"> scene b </option>
+      <option value=""> Change view </option>
+      <option value="./scenes/1.json"> view a </option>
+      <option value="./scenes/2.json"> view b </option>
     </select>
     </div>
 
     <div id="togglelink" style="position:absolute; top: 10px; right: 10px; z-index: 1005"> <a style="cursor:pointer;">
        <img src="./pwa/current.png"/>
     </a></div>
-    
 
   
   <style>
@@ -164,7 +164,10 @@
      if (isMobile) toggleView();
      jQuery( "#togglelink" ).on("click", toggleView );
      
-
+     jQuery("#vz-scene-select").on("change",function(e) {
+       var v = jQuery("#vz-scene-select").val();
+       console.log(v);
+     });
 
   </script>
   
@@ -178,7 +181,6 @@
       q.toggle();
       q.is(":visible") ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
     }
-    
     
     </script>  
 
