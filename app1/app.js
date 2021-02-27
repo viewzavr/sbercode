@@ -4,6 +4,8 @@ import * as S1 from "./scenes/scene1.js";
 import * as P1 from "./painters/p1.js";
 import * as P2 from "./painters/p2.js";
 
+import * as jLIST from "./json-loader/app-metrics-list.js";
+
 // A Viewzavr package is a javascript module. It may do anything, and beside that
 // there are following special functions may be exported:
 // * setup, which is called when package is loaded
@@ -15,6 +17,7 @@ export function setup( vz ) {
   csvload.setup( vz );
   csvloadLIST.setup( vz );
   S1.setup( vz );
+  jLIST.setup( vz );
 //  P1.setup( vz );
 //  P2.setup( vz );
   

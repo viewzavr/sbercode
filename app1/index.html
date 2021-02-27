@@ -32,10 +32,16 @@
     <div class="vz-mobile vz-mobile-top">
     <select id="vz-scene-select" style="width: 150px; height: 30px;">
       <option value=""> Change view </option>
+      
+      
       <option value="./scenes/1.json"> view a </option>
       <option value="./scenes/2.json"> view b </option>
       <option value="./scenes/3.json"> view c - many </option>
       <option value="./scenes/4.json"> view d - many f</option>      
+      
+      <option value="relogin"> New login </option>
+      <option value="reset">   Blank view </option>
+      
     </select>
     </div>
 
@@ -171,6 +177,18 @@
        var v = jQuery("#vz-scene-select").val();
        if (v.length == 0) return;
        console.log(v);
+       
+       if (v == "relogin") {
+         // todo
+         return;
+       }
+       if (v == "reset") {
+         vzPlayer.getRoot().remove();
+         vzPlayer.loadEmptyScene();
+         vzPlayer.startSavingToHash();
+         return;
+       }
+       
        if (v[0] != "/") v = vz.getDir(import.meta.url) + v;
        vzPlayer.loadJson( v );
      });

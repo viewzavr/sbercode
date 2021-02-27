@@ -6,7 +6,7 @@
 // setup function may register components in types table, which is used by player's visual interface
 // and by Viewzavr.createObjByType function.
 export function setup( vz ) {
-  vz.addItemType( "zoo-1","ZOO: сцена куча серверов", function( opts ) {
+  vz.addItemType( "zoo-1","ZOO: сцена - куча серверов", function( opts ) {
     return create( vz, opts );
   } );
 }
