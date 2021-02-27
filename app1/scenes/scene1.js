@@ -6,7 +6,7 @@
 // setup function may register components in types table, which is used by player's visual interface
 // and by Viewzavr.createObjByType function.
 export function setup( vz ) {
-  vz.addItemType( "zoo-1","ZOO: first", function( opts ) {
+  vz.addItemType( "zoo-1","ZOO: сцена куча серверов", function( opts ) {
     return create( vz, opts );
   } );
 }
@@ -57,12 +57,17 @@ export function create( vz, opts ) {
     obj.setGuiVisible( "model-file-gltf",v == 0);
     if (typeof(v) == "undefined" || v == 0) return;
     console.log("loading v=",v,dir + models[v]);
-    server.setParam("src",dir + models[v]);
+    server.setParam("src",models[v]);
   });
+  
   obj.signalTracked("model");
   obj.addFile("model-file-gltf","",function(v) {
     if (obj.getParam("model") != 0) return;
     server.setParam("src",v);
+  });
+  
+  obj.addSlider( "scale",1,0.1,20,0.1,function(s) {
+    pts.scales = [s];
   });
 
   return obj;
