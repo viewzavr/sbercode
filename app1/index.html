@@ -22,6 +22,8 @@
 <head>
 </head>
 <body ontouchstart="">
+
+
   <div id="qmlSpace">
       target space for qml...
   </div>
@@ -33,18 +35,11 @@
     </select>
     </div>
 
-    <div id="togglelink" style="position:absolute; top: 10px; right: 10px; z-index: 1005"> <a style="cursor:pointer;" onclick="javascript:toggleView()">
-<!--       VIEWCLOUD -->
+    <div id="togglelink" style="position:absolute; top: 10px; right: 10px; z-index: 1005"> <a style="cursor:pointer;">
        <img src="./pwa/current.png"/>
     </a></div>
     
-    <script>
-    function toggleView() {
-      var q = jQuery('#qmlSpace');
-      q.toggle();
-      q.is(":visible") ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
-    }
-    </script>
+
   
   <style>
   
@@ -78,8 +73,10 @@
   @media (max-width: 1200px) { 
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
+/*    
     #qmlSpace  { display: none;  }
     .vz-mobile { display: block; }
+*/    
   }
 
 /*
@@ -94,6 +91,8 @@
   </style>
 
   <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//threejs_driver/init.js"></script>
+  
+  <script> renderer.setClearColor( 0xFFFFFF, 1); </script>  
 
   <script type="module">
 
@@ -115,6 +114,11 @@
     import * as Player from "//viewzavr.com/apps/viewzavr-system-a/player/init.js";
     var vzPlayer = Player.create( vz, qmlEngine );
     window.vzPlayer = vzPlayer;
+    
+    //////////////////////////// styling patch
+    /* ****************************** bg color ****************** */
+    qmlEngine.rootObject.backgroundColor = [1,1,1];
+    renderer.setClearColor( 0xFFFFFF, 1);
     
     //////////////////////////// graphical api
     import * as VisAPI from "//viewzavr.com/apps/viewzavr-system-a/graphical-api/init.js";
@@ -151,7 +155,31 @@
         vzPlayer.loadFromHash();
         vzPlayer.startSavingToHash();
       });
+      
+     /* ***************************** toggle view ***************** */
+     function toggleView() {
+       qmlEngine.rootObject.showControls = !qmlEngine.rootObject.showControls;
+       qmlEngine.rootObject.showControls ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
+     }
+     if (isMobile) toggleView();
+     jQuery( "#togglelink" ).on("click", toggleView );
+     
+
 
   </script>
+  
+
+    
+    <script>
+
+    
+    function toggleView2() {
+      var q = jQuery('#qmlSpace');
+      q.toggle();
+      q.is(":visible") ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
+    }
+    
+    
+    </script>  
 
 </body>
