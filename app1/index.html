@@ -34,6 +34,8 @@
       <option value=""> Change view </option>
       <option value="./scenes/1.json"> view a </option>
       <option value="./scenes/2.json"> view b </option>
+      <option value="./scenes/3.json"> view c - many </option>
+      <option value="./scenes/4.json"> view d - many f</option>      
     </select>
     </div>
 
@@ -167,7 +169,10 @@
      
      jQuery("#vz-scene-select").on("change",function(e) {
        var v = jQuery("#vz-scene-select").val();
+       if (v.length == 0) return;
        console.log(v);
+       if (v[0] != "/") v = vz.getDir(import.meta.url) + v;
+       vzPlayer.loadJson( v );
      });
 
   </script>
@@ -175,8 +180,7 @@
 
     
     <script>
-
-    
+  
     function toggleView2() {
       var q = jQuery('#qmlSpace');
       q.toggle();
