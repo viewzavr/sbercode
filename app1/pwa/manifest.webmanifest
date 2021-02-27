@@ -1,12 +1,12 @@
 {
   "icons": [
     {
-      "src": "12636464591553681874-512.png",
+      "src": "current.png",
       "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "12636464591553681874-512.png",
+      "src": "current.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose":"maskable"
