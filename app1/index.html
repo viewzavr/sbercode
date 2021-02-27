@@ -166,7 +166,10 @@
      
      jQuery("#vz-scene-select").on("change",function(e) {
        var v = jQuery("#vz-scene-select").val();
+       if (v.length == 0) return;
        console.log(v);
+       if (v[0] != "/") vz = vz.getDir(import.meta.url) + v;
+       vzPlayer.loadJson( v );
      });
 
   </script>
@@ -174,8 +177,7 @@
 
     
     <script>
-
-    
+  
     function toggleView2() {
       var q = jQuery('#qmlSpace');
       q.toggle();
