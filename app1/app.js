@@ -25,6 +25,14 @@ export function setup( vz ) {
 export function create( vz, opts ) {
   opts.name ||= "demoscene";
   var obj = vz.createObj( opts );
+  
+  var authdlg = vz.addQml( vz.getDir(import.meta.url) + "auth/SberCloudLogin.qml", { parent: obj } );
+  authdlg.open();
+
+  authdlg.successChanged.connect( obj, function() {
+    var r = authdlg.success;
+    console.log("AUTH RESULT=",r);
+  });
 
   return obj;
 }

@@ -42,7 +42,8 @@ export function create( vz, opts ) {
   var tween;
   var tmr;
   
-  obj.addCmd("Позвать друга",function() {
+  var callme = "Позвать друга";
+  obj.addCmd(callme,function() {
     var q = vzPlayer.getParam("cameraPos");
     console.log(q);
     var tt = qmlEngine.rootObject.cameraPosReal;
@@ -98,8 +99,33 @@ export function create( vz, opts ) {
     }, 4000 );
   
   });
+  
+  // friend icon
+  friend_counter++;
+  var dir = vz.getDir( import.meta.url );
+  var str = `<div class='friend_${friend_counter}'> <img src='${dir}/friend.png'/></div>`;
+  jQuery("#friendSpace").append( str );
+  jQuery(`.friend_${friend_counter}`).on('click',function() { obj.signalTracked( callme ); console.log("called") } );
 
   return obj;
 }
+
+var friend_counter  = 0;
+jQuery("body").append( `
+<div id='friendSpace'/>
+<style>
+  #friendSpace {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 30000;
+    cursor:pointer;
+  }
+  #friendSpace img {
+    border: 0px;
+    width: 32px;
+  }
+</style>
+` );
 
 var synth = window.speechSynthesis;
