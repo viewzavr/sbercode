@@ -47,7 +47,7 @@ export function create( vz, opts ) {
     console.log(q);
     var tt = qmlEngine.rootObject.cameraPosReal;
     var tta = qmlEngine.rootObject.cameraCenter;
-    var coef = 0.8;
+    var coef = 0.7;
     tt = [ tta[0] + coef * (tt[0]-tta[0]), tta[1] + coef * (tt[1]-tta[1]), tta[2] + coef * (tt[2]-tta[2]) ];
     
     var cc = g.positions;
