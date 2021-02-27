@@ -23,7 +23,6 @@ export function create( vz, opts ) {
   obj.setParam( "@positions",[0,0,0] );
   obj.trackParam( "@positions",function() {
     var pp=obj.getParam("@positions");
-    debugger;
     pts.positions = pp;
   });
   

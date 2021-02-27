@@ -30,7 +30,7 @@ export function create( vz, opts ) {
   obj.trackParam( "@colors",function() {
     var pp=obj.getParam("@colors");
     pts.colors = pp;
-  });  
+  });
 
   return obj;
 }

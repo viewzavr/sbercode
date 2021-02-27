@@ -23,6 +23,10 @@ export function create( vz, opts ) {
   obj.addFile("src","",function(v) {
     g.setParam("src",v);
   });
+  
+/*  obj.addColor("color",[1,1,1],function(c) {
+    g.colors = c;
+  });*/
 
   return obj;
 }
