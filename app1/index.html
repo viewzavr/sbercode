@@ -169,7 +169,7 @@
        var v = jQuery("#vz-scene-select").val();
        if (v.length == 0) return;
        console.log(v);
-       if (v[0] != "/") vz = vz.getDir(import.meta.url) + v;
+       if (v[0] != "/") v = vz.getDir(import.meta.url) + v;
        vzPlayer.loadJson( v );
      });
 
