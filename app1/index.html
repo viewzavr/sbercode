@@ -27,15 +27,24 @@
   </div>
 
     <div class="vz-mobile vz-mobile-top">
-    <select style="width: 150px; height: 30px;">
-      <option> scene a </option>
-      <option> scene b </option>
+    <select id="vz-scene-select" style="width: 150px; height: 30px;">
+      <option value="1"> scene a </option>
+      <option value="2"> scene b </option>
     </select>
     </div>
 
-    <div id="togglelink" style="position:absolute; top: 5px; right: 10px; z-index: 1005"> <a style="cursor:pointer;" onclick="javascript:jQuery('#qmlSpace').toggle();">VIEWCLOUD</a></div>
+    <div id="togglelink" style="position:absolute; top: 5px; right: 10px; z-index: 1005"> <a style="cursor:pointer;" onclick="javascript:jQuery('#qmlSpace').toggle();">
+<!--       VIEWCLOUD -->
+       <img src="./pwa/current.png"/>
+    </a></div>
   
   <style>
+  
+  #togglelink img {
+    width: 36px;
+    border: 0px;
+  }
+  
   #qmlSpace {
     width: 100vw !important;
     bottom: 0px !important;
