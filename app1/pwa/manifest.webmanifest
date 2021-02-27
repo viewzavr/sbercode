@@ -13,10 +13,10 @@
     }
   ],
 
-  "name": "Viewzavr Monitor",
-  "short_name": "Viewzavr Monitor",
-  "description": "Viewzavr player on a phone.",
-  "start_url": "/apps/sber/mobin/",
+  "name": "ViewCloud",
+  "short_name": "ViewCloud",
+  "description": "ViewCloud system",
+  "start_url": "/app1/",
   "display":"standalone",
   "background_color":"#ffffff",
   "theme_color":"#ffffff"
