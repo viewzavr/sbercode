@@ -10,6 +10,9 @@ export function setup( vz ) {
 export function create( vz, opts ) {
 //  opts.name ||= "simple-graph-P1";
   var obj = vz.createObj( opts );
+  
+    obj.setParam("@times",[] );
+    obj.setParam("@values",[] );
 
   var values = [];
   var times = [];
