@@ -2,6 +2,7 @@ friend.js
 gltf-model.js
 gltf-model-s.js
 lines.js
+mass-points.js
 p1.js
 p2.js
 p4-formula.js

@@ -33,7 +33,7 @@ export function create( vz, opts ) {
     filterThem();
   }
   
-  //////
+  ////// toodo move filter to mass-loader
   obj.addString("filter_regexp","ECS.*load_average",filterThem);
   
   function filterThem() {

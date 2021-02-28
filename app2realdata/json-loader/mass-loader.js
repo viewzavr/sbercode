@@ -50,9 +50,7 @@ https://sber-metrics.*.com/metrics-data?
 
 Дополнительно надо указывать time_from, time_to и period в секундах. Период может быть: 1, 300, 1200, 3600, 14400 или 86400
     */
-    
 
-    
     function doload( k,tick ) {
       var me = m[k];
       var courl = `https://sber-metrics.viewzavr.com/metrics-data?namespace=${me.namespace}&project=${me.project}&metric=${me.metric}&subject_type=${me.subject_type}&subject_uuid=${me.subject_uuid}&time_from=${dasTimeFrom}&time_to=${dasTimeTo}&period=${period}`;
@@ -66,7 +64,7 @@ https://sber-metrics.*.com/metrics-data?
          var vv=[];
          var tt=[];
          metric_data.forEach( function(m) {
-           vv.push( m.values );
+           vv.push( m.value );
            tt.push( m.timestamp );
          });
          values[k]=vv;
