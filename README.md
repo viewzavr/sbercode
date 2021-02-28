@@ -1,5 +1,18 @@
-# sbercode
+# Команда viewzavr_sbercode
 
-сцена с сеткой: https://tinyurl.com/yb26coys
+# Запуск мобильного приложения
 
-простой график 1 штука: https://tinyurl.com/yb9dbayt
+  https://snack.expo.io/@marksapozhnikov/viewcloud
+
+далее выбрать пункт *MyDevice*, установить программу *Expo Go* 
+и отсканировать с её помощью штрих-код с сайта.
+
+# Другие формы запуска
+Версия для компьютеров и шлемов виртуальной реальности 
+https://vc.viewzavr.com
+
+Для активации шлемов нажать кнопку Enter VR.
+
+# Лицензия
+
+MIT

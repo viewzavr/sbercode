@@ -38,9 +38,11 @@
       <option value="./scenes/2.json"> view b </option>
       <option value="./scenes/3.json"> view c - many </option>
       <option value="./scenes/4.json"> view d - many f</option>      
-      
+
+<!--
       <option value="relogin"> New login </option>
       <option value="reset">   Blank view </option>
+-->
       
     </select>
     </div>
@@ -180,7 +182,8 @@
        qmlEngine.rootObject.showControls = !qmlEngine.rootObject.showControls;
        qmlEngine.rootObject.showControls ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
      }
-     if (isMobile) toggleView();
+     // if (isMobile)  // always
+     toggleView();
      jQuery( "#togglelink" ).on("click", toggleView );
      
      jQuery("#vz-scene-select").on("change",function(e) {
@@ -204,9 +207,7 @@
      });
 
   </script>
-  
 
-    
     <script>
   
     function toggleView2() {

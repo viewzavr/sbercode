@@ -218,9 +218,9 @@
               "params": {
                 "radius": 2,
                 "color": [
-                  1,
-                  0.12,
-                  1
+                  0.8,
+                  0.8,
+                  0.8
                 ],
                 "opacity": 73,
                 "depth-test": 1,
@@ -253,9 +253,9 @@
               "params": {
                 "radius": 2,
                 "color": [
-                  1,
-                  0.12,
-                  1
+                  0.8,
+                  0.8,
+                  0.8
                 ],
                 "opacity": 73,
                 "depth-test": 1,
