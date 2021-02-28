@@ -1,10 +1,16 @@
 import * as jLIST from "./json-loader/app-metrics-list.js";
 import * as jLOAD from "./json-loader/mass-loader.js";
+import  * as csvload from "./csv-loader/app.js";
+import * as csvloadLIST from "./csv-loader/app-metrics-list.js";
+import * as S1 from "./scenes/scene1.js";
 
 export function setup( vz ) {
 
   jLIST.setup( vz );  
   jLOAD.setup( vz );
+  csvload.setup( vz );
+  csvloadLIST.setup( vz );
+  
   return vzPlayer.loadPackage( vz.getDir( import.meta.url ) + "/painters/files.txt" );
 }
 
@@ -19,6 +25,11 @@ export function create( vz, opts ) {
   metrics.trackParam("@metrics_output",function() {
     var v = metrics.getParam("@metrics_output");
     mloader.setParam("@metrics_input",v);
+  });
+  
+  obj.trackParam("filter_regexp",function() {
+    var v = obj.getParam("filter_regexp");
+    metrics.setParam("filter_regexp",v);
   });
 
 /*  

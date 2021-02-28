@@ -45,7 +45,15 @@ export function create( vz, opts ) {
       return;
     }
 
-    var re = new RegExp( f );
+    var re;
+    
+    try {
+      re = new RegExp( f );
+    } catch(ex) {
+      console.error(ex);
+      return;
+      
+    }
     
     var filtered = m.filter( function(rec) {
       var string_repr = Object.values( rec ).join("/");

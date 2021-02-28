@@ -24,12 +24,16 @@ export function create( vz, opts ) {
     }
     
     var len = m.length;
+    
+    if (len > 5000) len = 5000; // сток запросов все-равно не дождаться
+    
     values = new Array(len);
     times = new Array(len);
     
     var dasTimeTo = Math.floor( new Date().getTime() / 1000 );
     var dasTimeFrom = dasTimeTo - 1000 * 60 * 60 * 24 * 2; // здесь 2 это кол-во дней
-    var period = m.length < 100 ? 1 : 300;    
+    // var period = m.length < 100 ? 1 : 300; глючит облако кажется
+    var period = 1; // если метрик много... то это печально..
     
     for (var i=0; i<len; i++) {
       doload( i,ticker );
@@ -60,7 +64,14 @@ https://sber-metrics.*.com/metrics-data?
       // вот тут то и ага
     
       loadFile( courl,function(res) { // viewlang's func
-         var metric_data = JSON.parse(res).msg;
+         var metric_data;
+         
+         try {
+           metric_data = JSON.parse(res).msg;
+         } catch (ex) {
+           console.error("failed to parse resp",ex,res );
+           return;
+         }
          var vv=[];
          var tt=[];
          metric_data.forEach( function(m) {
@@ -85,6 +96,8 @@ https://sber-metrics.*.com/metrics-data?
     console.log("ticker ",ki );
     obj.setParam("@times",times );
     obj.setParam("@values",values );
+    obj.signalTracked("@times");
+    obj.signalTracked("@values");
   }
 
   return obj;

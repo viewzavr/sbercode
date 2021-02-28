@@ -30,7 +30,18 @@ export function create( vz, opts ) {
   var daylen = 60 * 60 * 24;
 //  var daylencoef = 
 
+  var tmrid;
   function go() {
+    if (tmrid) return;
+    tmrid = setTimeout( function() {
+      tmrid = undefined;
+      goreal();
+    }, 50 );
+  }
+
+  setInterval( goreal, 2000 );
+  
+  function goreal() {
    // todo timeout
    
    var tt = obj.getParam("@times");
@@ -52,9 +63,9 @@ export function create( vz, opts ) {
     function tr( x,y,z ) {
       return [sx*(tm[i]-dasTimeTo)/daylen, sy*vm[i], (k-k2)];
     }
-*/    
-    
-   
+*/
+  
+
    for (var k=0; k<tt.length; k++) {
    
     var vm = vv[k];

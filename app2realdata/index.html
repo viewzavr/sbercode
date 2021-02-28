@@ -22,27 +22,13 @@
 </head>
 <body ontouchstart="">
 
-
   <div id="qmlSpace">
       target space for qml...
   </div>
 
     <div class="vz-mobile vz-mobile-top">
-    <select id="vz-scene-select" style="width: 150px; height: 30px;">
-      <option value=""> Change view </option>
-      
-      
-      <option value="./scenes/1.json"> view a </option>
-      <option value="./scenes/2.json"> view b </option>
-      <option value="./scenes/3.json"> view c - many </option>
-      <option value="./scenes/4.json"> view d - many f</option>      
-
-<!--
-      <option value="relogin"> New login </option>
-      <option value="reset">   Blank view </option>
--->
-      
-    </select>
+      Metrics filter (regexp):<br/>
+      <input id="metricsfilter" style="width: 142px; height: 27px;" value="ECS.+"/>
     </div>
 
     <div id="togglelink" style="position:absolute; top: 40px; right: 10px; z-index: 1005"> <a style="cursor:pointer;">
@@ -92,19 +78,7 @@
   @media (max-width: 1200px) { 
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
-/*    
-    #qmlSpace  { display: none;  }
-    .vz-mobile { display: block; }
-*/    
   }
-
-/*
-  @media (max-width: 1200px) and (orientation: portrait) { 
-    #qmlSpace { display: none; }
-
-  }
-*/
-/*    .Shower > .ComboBox */
   
   body { margin: 0; }
   </style>
@@ -171,8 +145,11 @@
       }
       
       q.then( function() {
-        vzPlayer.loadFromHash();
-        vzPlayer.startSavingToHash();
+        var v = vz.getDir(import.meta.url) + "/scenes/5.json";
+        vzPlayer.loadJson( v ).then( function() {
+          vzPlayer.loadFromHash();
+          vzPlayer.startSavingToHash();
+        });
       });
       
      /* ***************************** toggle view ***************** */
@@ -180,31 +157,13 @@
        qmlEngine.rootObject.showControls = !qmlEngine.rootObject.showControls;
        qmlEngine.rootObject.showControls ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
      }
-     // if (isMobile)  // always
+
      toggleView();
      jQuery( "#togglelink" ).on("click", toggleView );
-     
-     jQuery("#vz-scene-select").on("change",function(e) {
-       var v = jQuery("#vz-scene-select").val();
-       if (v.length == 0) return;
-       console.log(v);
-       
-       if (v == "relogin") {
-         // todo
-         return;
-       }
-       if (v == "reset") {
-         vzPlayer.getRoot().remove();
-         vzPlayer.loadEmptyScene();
-         vzPlayer.startSavingToHash();
-         return;
-       }
-       
-       if (v[0] != "/") v = vz.getDir(import.meta.url) + v;
-       vzPlayer.loadJson( v );
-     });
+ 
+     qmlEngine.rootObject.showAxes = true;
 
-  </script>
+    </script>
 
     <script>
   
@@ -213,6 +172,10 @@
       q.toggle();
       q.is(":visible") ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
     }
+    
+    jQuery( "#metricsfilter" ).change(function() {
+      vzPlayer.getRoot().setParam( "filter_regexp", jQuery( this ).val() );
+    });
     
     </script>  
 

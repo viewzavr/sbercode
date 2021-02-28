@@ -1,0 +1,138 @@
+{
+  "children": {
+    "state": {
+      "children": {}
+    },
+    "scene": {
+      "module_url": "https://vc.viewzavr.com/app2realdata/./app.js",
+      "children": {
+        "metrics": {
+          "params": {
+            "file": "https://sber-metrics.viewzavr.com/metrics",
+            "filter_regexp": "ECS.*"
+          }
+        },
+        "metrics-mass-loader": {
+          "params": {}
+        },
+        "zoo-mass-points": {
+          "params": {
+            "sy": 0.086,
+            "day-len-coef": 50,
+            "metric-values-amount": "116",
+            "metric-times-amount": "116",
+            "metric-first-len": "2724"
+          },
+          "manual": true,
+          "type": "zoo-mass-points",
+          "children": {
+            "points": {
+              "params": {
+                "radius": 1.3,
+                "color": [
+                  0.01,
+                  1,
+                  0.14
+                ],
+                "opacity": 100,
+                "depth-test": 1,
+                "shape": 2
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "// enter transform code here. arg: v - input value\nreturn v",
+                "to": "/zoo-mass-points->@times",
+                "from": "/metrics-mass-loader->@times",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            },
+            "formula_1": {
+              "params": {
+                "enabled": true,
+                "transform-code": "// enter transform code here. arg: v - input value\nreturn v",
+                "to": "/zoo-mass-points->@values",
+                "from": "/metrics-mass-loader->@values",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 2
+            }
+          },
+          "order": 2
+        },
+        "zoo-lines": {
+          "params": {},
+          "manual": true,
+          "type": "zoo-lines",
+          "children": {
+            "lines": {
+              "params": {
+                "radius": 1.8,
+                "color": [
+                  0.55,
+                  0.84,
+                  0.55
+                ],
+                "opacity": 100
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "var acc=[];\nvar n=200;\nvar n2=n/2;\nvar y=-2;\nfor (var j=-n2; j<n2; j+=5) {\n  acc.push( j,y,n2, j,y,-n2 );\n  acc.push( n2,y,j, -n2,y,j );\n}\nreturn acc",
+                "to": "/zoo-lines->@positions",
+                "from": "",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            }
+          },
+          "order": 3
+        },
+        "zoo-friend": {
+          "params": {
+            "src": "https://vc.viewzavr.com/app2realdata//painters/../../../assets/friend.glb"
+          },
+          "manual": true,
+          "type": "zoo-friend",
+          "children": {
+            "voice": {
+              "params": {
+                "text": "Привет мой друг! За сутки четыре отказа, а в остальном все в норме!\nПривет мой друг! Наши дела идут хорошо! респонс прекрасен!\nПривет мой друг! Что-то сервер баз данных подбарахливает!\nПривет мой друг! Назови группу серверов для перехода к ним.\nПривет мой друг! Обратите внимание! На узле worker303 обнаружен новый паттэрн.\n",
+                "rate": 1,
+                "pitch": 1.2,
+                "voice": "Google русский"
+              }
+            },
+            "model": {
+              "params": {
+                "opacity": 100,
+                "scale": 1,
+                "color": [],
+                "src": "https://vc.viewzavr.com/app2realdata//painters/../../../assets/friend.glb",
+                "animation_0": 0
+              }
+            }
+          },
+          "order": 4
+        }
+      },
+      "packages": {
+        "codes": [],
+        "urls": []
+      }
+    }
+  },
+  "viewzavr_player_flags": 1
+}
