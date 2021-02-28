@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" sizes="140x140" href="../pwa/current.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="../pwa/current.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../pwa/current.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="../pwa/current.png"> 
+  <script src="./pwa/setup.js"></script>
+  
+  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code/depends/jquery-2.1.4.js"></script>
+
+  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/parser.js"></script>
+  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/process.js"></script>
+  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/import.js"></script>
+  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/qtcore.js"></script>
+
+  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//base.js"></script>
+  <link rel="stylesheet" href="./style.css">
+<head>
+</head>
+<body ontouchstart="">
+
+
+  <div id="qmlSpace">
+      target space for qml...
+  </div>
+
+    <div class="vz-mobile vz-mobile-top">
+    <select id="vz-scene-select" style="width: 150px; height: 30px;">
+      <option value=""> Change view </option>
+      
+      
+      <option value="./scenes/1.json"> view a </option>
+      <option value="./scenes/2.json"> view b </option>
+      <option value="./scenes/3.json"> view c - many </option>
+      <option value="./scenes/4.json"> view d - many f</option>      
+
+<!--
+      <option value="relogin"> New login </option>
+      <option value="reset">   Blank view </option>
+-->
+      
+    </select>
+    </div>
+
+    <div id="togglelink" style="position:absolute; top: 40px; right: 10px; z-index: 1005"> <a style="cursor:pointer;">
+       <img src="../pwa/current.png"/>
+    </a></div>
+
+  
+  <style>
+    
+  #friendSpace {
+    position: absolute;
+    bottom: 30px;
+    right: 15px;
+    z-index: 30000;
+    cursor: pointer;
+  }
+    
+    
+  #togglelink img {
+    position: relative;
+    width: 36px;
+    border: 0px;
+  }
+  
+  #qmlSpace {
+    width: 100vw !important;
+    bottom: 0px !important;
+    z-index: 10000;
+  }
+  
+  .viewlang-canvas {
+    width: 100%; height: 100%;
+    margin: 0; padding: 0; display: block; left: 0px; top: 0px; position: absolute;
+  }
+  
+  .vz-mobile {
+    z-index: 5000;
+    display: none;
+  }
+  
+  .vz-mobile-top {
+    position: absolute;
+    top: 40px; 
+    left: 10px;
+  }
+
+  @media (max-width: 1200px) { 
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+/*    
+    #qmlSpace  { display: none;  }
+    .vz-mobile { display: block; }
+*/    
+  }
+
+/*
+  @media (max-width: 1200px) and (orientation: portrait) { 
+    #qmlSpace { display: none; }
+
+  }
+*/
+/*    .Shower > .ComboBox */
+  
+  body { margin: 0; }
+  </style>
+
+  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//threejs_driver/init.js"></script>
+  
+  <script> renderer.setClearColor( 0xFFFFFF, 1); </script>  
+
+  <script type="module">
+
+    ///////////////////////////// qmlweb and viewlang (required for viewzavr-system-a implementation)
+    
+    import * as Viewlang from "//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code/embed2/init.js"
+    window.qmlEngine = new QMLEngine( document.getElementById( "qmlSpace" ) );
+    Viewlang.setup_qmlweb( qmlEngine );
+    
+    ///////////////////////////// viewzavr
+    
+    import * as Viewzavr from "//viewzavr.com/apps/viewzavr-system-a/lib/viewzavr-core/init.js";
+
+    var vz = Viewzavr.create();
+    // window.vz = vz;
+    
+    //////////////////////////// player
+    
+    import * as Player from "//viewzavr.com/apps/viewzavr-system-a/player/init.js";
+    var vzPlayer = Player.create( vz, qmlEngine );
+    window.vzPlayer = vzPlayer;
+    
+    //////////////////////////// styling patch
+    /* ****************************** bg color ****************** */
+    qmlEngine.rootObject.backgroundColor = [1,1,1];
+    renderer.setClearColor( 0xFFFFFF, 1);
+    
+    //////////////////////////// graphical api
+    import * as VisAPI from "//viewzavr.com/apps/viewzavr-system-a/graphical-api/init.js";
+    VisAPI.setup( vz );
+
+    //////////////////////////// library-one
+    import * as lib1 from "//viewzavr.com/apps/viewzavr-system-a/lib/library-one/init.js";
+    lib1.setup( vz, vzPlayer );
+
+    //////////////////////////// load user script
+
+      // use this logic if you want to load app files defined in parameter.
+      var userurl = getParameterByName("src");
+      if (!userurl) userurl = vz.getDir( import.meta.url ) + "./app.js";
+      // var userurl = vz.getDir( import.meta.url ) + "//viewzavr.com/apps/viewzavr-system-a/app.js";
+
+      console.log("user script url=",userurl );
+
+      var q;
+      if (userurl) {
+        // тут у нас форматирование для загрузки через прокси
+        userurl = formatSrc( userurl );
+        console.log("reformatted:",userurl );
+        q = vzPlayer.loadApp( userurl );
+      }
+      else 
+      {
+        // idea: load empty scene always and then load user scripts into it as a child?
+        console.log("lllloading empty scene..");
+        q = vzPlayer.loadEmptyScene();
+      }
+      
+      q.then( function() {
+        vzPlayer.loadFromHash();
+        vzPlayer.startSavingToHash();
+      });
+      
+     /* ***************************** toggle view ***************** */
+     function toggleView() {
+       qmlEngine.rootObject.showControls = !qmlEngine.rootObject.showControls;
+       qmlEngine.rootObject.showControls ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
+     }
+     // if (isMobile)  // always
+     toggleView();
+     jQuery( "#togglelink" ).on("click", toggleView );
+     
+     jQuery("#vz-scene-select").on("change",function(e) {
+       var v = jQuery("#vz-scene-select").val();
+       if (v.length == 0) return;
+       console.log(v);
+       
+       if (v == "relogin") {
+         // todo
+         return;
+       }
+       if (v == "reset") {
+         vzPlayer.getRoot().remove();
+         vzPlayer.loadEmptyScene();
+         vzPlayer.startSavingToHash();
+         return;
+       }
+       
+       if (v[0] != "/") v = vz.getDir(import.meta.url) + v;
+       vzPlayer.loadJson( v );
+     });
+
+  </script>
+
+    <script>
+  
+    function toggleView2() {
+      var q = jQuery('#qmlSpace');
+      q.toggle();
+      q.is(":visible") ? jQuery('.vz-mobile').hide() : jQuery('.vz-mobile').show();
+    }
+    
+    </script>  
+
+</body>

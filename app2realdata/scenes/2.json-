@@ -1,0 +1,234 @@
+{
+  "params": {
+    "cameraPos": [
+      14.307513397209622,
+      1.0982525837942438,
+      1.0827882621471374
+    ],
+    "cameraCenter": [
+      -0.29065644085318554,
+      1.0143533014420822,
+      0.9085065212083858
+    ]
+  },
+  "children": {
+    "state": {
+      "children": {}
+    },
+    "scene": {
+      "params": {
+        "r": 50,
+        "model": 1
+      },
+      "module_url": "/app1/scenes/app.js",
+      "children": {
+        "load_csv": {
+          "params": {
+            "file": "/assets/1.csv",
+            "loaded-columns": "T\nMEM"
+          },
+          "manual": true,
+          "type": "zoo-csv",
+          "order": 0
+        },
+        "bgcolor": {
+          "params": {
+            "color": [
+              0.09,
+              0.09,
+              0.17
+            ]
+          },
+          "manual": true,
+          "type": "bgcolor",
+          "order": 1
+        },
+        "simple-graph-P1": {
+          "params": {
+            "sx": 0.607,
+            "sy": 5,
+            "lines": true
+          },
+          "manual": true,
+          "type": "zoo-p2",
+          "children": {
+            "points": {
+              "params": {
+                "radius": 1.5,
+                "color": [
+                  1,
+                  0,
+                  0
+                ],
+                "opacity": 51,
+                "depth-test": 1,
+                "shape": 4,
+                "additive": 0
+              }
+            },
+            "lines": {
+              "params": {
+                "radius": 2,
+                "color": [
+                  0.83,
+                  0.98,
+                  1
+                ],
+                "opacity": 3
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "// enter transform code here. arg: v - input value\nreturn v",
+                "to": "/simple-graph-P1->@input",
+                "from": "/load_csv->@MEM",
+                "tied_to_parent": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 2
+            }
+          },
+          "order": 2
+        },
+        "zoo-gltf": {
+          "params": {
+            "src": "/assets/m2/scene.gltf"
+          },
+          "manual": true,
+          "type": "zoo-gltf",
+          "children": {
+            "model": {
+              "params": {
+                "opacity": 100,
+                "scale": 7.2,
+                "color": [],
+                "src": "/assets/m2/scene.gltf"
+              }
+            }
+          },
+          "order": 3
+        },
+        "bgimage": {
+          "params": {
+            "image": "https://images.unsplash.com/photo-1518066000714-58c45f1a2c0a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw=&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          },
+          "manual": true,
+          "type": "bgimage",
+          "order": 4
+        },
+        "zoo-gltf-s": {
+          "params": {
+            "src": "/assets/Duck.glb"
+          },
+          "manual": true,
+          "type": "zoo-gltf-s",
+          "children": {
+            "clones": {
+              "params": {
+                "opacity": 100
+              }
+            },
+            "model": {
+              "params": {
+                "opacity": 99,
+                "scale": 8.9,
+                "color": [],
+                "src": "/assets/Duck.glb"
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "// enter transform code here. arg: v - input value\nreturn [0,0,0,5,5,10]\n",
+                "to": "/zoo-gltf-s->@positions",
+                "from": "",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 2
+            }
+          },
+          "order": 5
+        },
+        "zoo-points": {
+          "params": {},
+          "manual": true,
+          "type": "zoo-points",
+          "children": {
+            "points": {
+              "params": {
+                "radius": 0.1,
+                "color": [
+                  0.06,
+                  0.48,
+                  0
+                ],
+                "opacity": 100,
+                "depth-test": 1,
+                "shape": 2,
+                "additive": 0
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "// enter transform code here. arg: v - input value\nvar acc=[];\nfor (var j=0; j<100; j++)\nfor (var i=0; i<100; i++)\nacc.push( i-50,-2,j-50);\nreturn acc",
+                "to": "/zoo-points->@positions",
+                "from": "/load_csv->@MEM",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            }
+          },
+          "order": 6
+        },
+        "zoo-lines": {
+          "params": {},
+          "manual": true,
+          "type": "zoo-lines",
+          "children": {
+            "lines": {
+              "params": {
+                "radius": 2.5,
+                "color": [
+                  0.22,
+                  1,
+                  0.06
+                ],
+                "opacity": 46
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "var acc=[];\nvar n=100;\nvar n2=n/2;\nvar y=-2;\nfor (var j=-n2; j<n2; j++) {\n  acc.push( j,y,n2, j,y,-n2 );\n  acc.push( n2,y,j, -n2,y,j );\n}\nreturn acc",
+                "to": "/zoo-lines->@positions",
+                "from": "",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            }
+          },
+          "order": 7
+        }
+      },
+      "packages": {
+        "codes": [
+          "vis-comps"
+        ],
+        "urls": []
+      }
+    }
+  },
+  "viewzavr_player_flags": 1
+}

@@ -120,12 +120,15 @@ state_0();
 function state_0() { // enter
   
   console.log("state_0");
-  $.getJSON( {url: "https://sber-metrics.alexbers.com/metrics", xhrFields: { withCredentials: true }}, function( data ) {
+  state_1();
+  /*
+  $.getJSON( {url: "https://sber-metrics.viewzavr.com/metrics", xhrFields: { withCredentials: true }}, function( data ) {
     if (data.status == "ok") 
       state_2();
     else
       state_1();
   })
+  */
 }
 
 function state_1() {
@@ -135,7 +138,7 @@ $( "#lform" ).submit(function( event ) {
   event.preventDefault();
   
   var arr=[$("#fdomain").val(),$("#fuser").val(),$("#fpwd").val()];
-      $.getJSON( {url: `https://sber-metrics.alexbers.com/auth?user=${arr[1]}&password=${arr[2]}&domain=${arr[0]}&project=ru-moscow-1`,
+      $.getJSON( {url: `https://sber-metrics.viewzavr.com/auth?user=${arr[1]}&password=${arr[2]}&domain=${arr[0]}&project=ru-moscow-1`,
         xhrFields: { withCredentials: true }}, function( data ) {
           $("#status").text(JSON.stringify(data.msg, null, 2));
           if (data.status == "ok") {
@@ -146,15 +149,18 @@ $( "#lform" ).submit(function( event ) {
 
 }
 
-function state_2() {
+function state_2() { // enter authorized state
   console.log("state_2");
-  $("#formoid").hide();
+  window.location.replace("/app2realdata/");
+/*  
+  $("#formoid").hide();  
   $(".navbar-brand").hide();
   $(".vis").show();
   
-  $.getJSON( {url: "https://sber-metrics.alexbers.com/metrics", xhrFields: { withCredentials: true }}, function( data ) {
+  $.getJSON( {url: "https://sber-metrics.viewzavr.com/metrics", xhrFields: { withCredentials: true }}, function( data ) {
     debugger;
   })
+*/  
 }
 
 </script>

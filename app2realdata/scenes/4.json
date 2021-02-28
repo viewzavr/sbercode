@@ -1,0 +1,292 @@
+{
+  "params": {
+    "cameraPos": [
+      -32.547526038952086,
+      12.4038839064509,
+      62.455569215621814
+    ],
+    "cameraCenter": [
+      2.241534753272776,
+      0.01993646968676288,
+      3.0947412252540696
+    ]
+  },
+  "children": {
+    "state": {
+      "children": {}
+    },
+    "scene": {
+      "params": {
+        "r": 50,
+        "model": 1
+      },
+      "module_url": "https://vc.viewzavr.com/app1/./app.js",
+      "children": {
+        "load_csv": {
+          "params": {
+            "file": "/assets/1.csv",
+            "loaded-columns": "T\nMEM"
+          },
+          "manual": true,
+          "type": "zoo-csv",
+          "order": 0
+        },
+        "zoo-points": {
+          "params": {},
+          "manual": true,
+          "type": "zoo-points",
+          "children": {
+            "points": {
+              "params": {
+                "radius": 0.1,
+                "color": [
+                  0.06,
+                  0.48,
+                  0
+                ],
+                "opacity": 100,
+                "depth-test": 1,
+                "shape": 2,
+                "additive": 0
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "// enter transform code here. arg: v - input value\nvar acc=[];\nfor (var j=0; j<100; j++)\nfor (var i=0; i<100; i++)\nacc.push( i-50,-2,j-50);\nreturn acc",
+                "to": "/zoo-points->@positions",
+                "from": "/load_csv->@MEM",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            }
+          },
+          "order": 1
+        },
+        "zoo-lines": {
+          "params": {},
+          "manual": true,
+          "type": "zoo-lines",
+          "children": {
+            "lines": {
+              "params": {
+                "radius": 2.5,
+                "color": [
+                  0.22,
+                  1,
+                  0.06
+                ],
+                "opacity": 46
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "var acc=[];\nvar n=100;\nvar n2=n/2;\nvar y=-2;\nfor (var j=-n2; j<n2; j++) {\n  acc.push( j,y,n2, j,y,-n2 );\n  acc.push( n2,y,j, -n2,y,j );\n}\nreturn acc",
+                "to": "/zoo-lines->@positions",
+                "from": "",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            }
+          },
+          "order": 2
+        },
+        "zoo-friend": {
+          "params": {
+            "src": "https://vc.viewzavr.com/app1//painters/../../../assets/friend.glb"
+          },
+          "manual": true,
+          "type": "zoo-friend",
+          "children": {
+            "voice": {
+              "params": {
+                "text": "Привет мой друг! За сутки четыре отказа, а в остальном все в норме!\nПривет мой друг! Наши дела идут хорошо! респонс прекрасен!\nПривет мой друг! Что-то сервер баз данных подбарахливает!\nПривет мой друг! Назови группу серверов для перехода к ним.\nПривет мой друг! Обратите внимание! На узле worker303 обнаружен новый паттэрн.\n",
+                "rate": 1,
+                "pitch": 1.2,
+                "voice": "Google русский"
+              }
+            },
+            "model": {
+              "params": {
+                "opacity": 100,
+                "scale": 1,
+                "color": [],
+                "src": "https://vc.viewzavr.com/app1//painters/../../../assets/friend.glb",
+                "animation_0": 0
+              }
+            }
+          },
+          "order": 3
+        },
+        "cameraZ": {
+          "params": {
+            "auto-rotate": 0,
+            "teta-angle": 6.559999999994034
+          },
+          "manual": true,
+          "type": "cameraZ",
+          "order": 4
+        },
+        "demoscene": {
+          "params": {
+            "r": 65,
+            "model": 1,
+            "scale": 5
+          },
+          "manual": true,
+          "type": "zoo-1",
+          "children": {
+            "clones": {
+              "params": {
+                "opacity": 100
+              }
+            },
+            "lines": {
+              "params": {
+                "radius": 2,
+                "color": [
+                  0.08,
+                  0.48,
+                  1
+                ],
+                "opacity": 76
+              }
+            }
+          },
+          "order": 5
+        },
+        "points-game": {
+          "params": {
+            "appear-speed": 10,
+            "change-speed": 1,
+            "points-count": 100,
+            "points": "/demoscene/clones",
+            "steps": 8375,
+            "missed": 100,
+            "rating": 0,
+            "catched": 0,
+            "active": 0
+          },
+          "manual": true,
+          "type": "points-game",
+          "children": {
+            "colorer-multi": {
+              "params": {
+                "start-color": "#ffaaaa",
+                "final-color": "#ff0000",
+                "unpressed-color": [
+                  0.03,
+                  1,
+                  0.29
+                ],
+                "pressed-color": "#ffffff"
+              }
+            },
+            "interact": {},
+            "sounds": {
+              "params": {
+                "volume": 0,
+                "appear-sound-volume": 1,
+                "hit-sound-preset": 2,
+                "hit-sound": "https://viewlang.ru/viewzavr-apps/vr-points-game/points-game/sounds/files2/Stapling Paper-SoundBible.com-238116558.mp3",
+                "hit-sound-volume": 1,
+                "boom-sound-preset": 3,
+                "boom-sound": "https://viewlang.ru/viewzavr-apps/vr-points-game/points-game/sounds/files/414619__pjcohen__maraca-low-shake-velocity-11.wav",
+                "boom-sound-volume": 1,
+                "appear-sound-preset": 4,
+                "appear-sound": [
+                  "https://viewlang.ru/viewzavr-apps/vr-points-game/points-game/sounds/files/324612__gokhanbiyik__arp-02.wav"
+                ]
+              }
+            }
+          },
+          "order": 6
+        },
+        "zoo-points_3": {
+          "params": {},
+          "manual": true,
+          "type": "zoo-points",
+          "children": {
+            "points": {
+              "params": {
+                "radius": 2,
+                "color": [
+                  0.8,
+                  0.8,
+                  0.8
+                ],
+                "opacity": 73,
+                "depth-test": 1,
+                "shape": 2,
+                "additive": 0
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "\nvar x=10,y=2,z=0,r=5,ry=20;\nvar acc = [];\nfor (var j=0; j<500; j++) \n  acc.push( x+r*Math.random(),y+Math.random()*ry,z+Math.random()*r );\nreturn acc;",
+                "to": "/zoo-points_3->@positions",
+                "from": "",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            }
+          },
+          "order": 7
+        },
+        "zoo-points_4": {
+          "params": {},
+          "manual": true,
+          "type": "zoo-points",
+          "children": {
+            "points": {
+              "params": {
+                "radius": 2,
+                "color": [
+                  0.8,
+                  0.8,
+                  0.8
+                ],
+                "opacity": 73,
+                "depth-test": 1,
+                "shape": 2,
+                "additive": 0
+              }
+            },
+            "formula": {
+              "params": {
+                "enabled": true,
+                "transform-code": "\nvar x=0,y=2,z=-15,r=5,ry=20;\nvar acc = [];\nfor (var j=0; j<500; j++) \n  acc.push( x+r*Math.random(),y+Math.random()*ry,z+Math.random()*r );\nreturn acc;",
+                "to": "/zoo-points_4->@positions",
+                "from": "",
+                "tied_to_parent": true,
+                "transform-enabled": true
+              },
+              "manual": true,
+              "type": "link",
+              "order": 1
+            }
+          },
+          "order": 8
+        }
+      },
+      "packages": {
+        "codes": [
+          "points-game"
+        ],
+        "urls": []
+      }
+    }
+  },
+  "viewzavr_player_flags": 1
+}
