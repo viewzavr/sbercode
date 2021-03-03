@@ -1,0 +1,3 @@
+[submodule "viewzavr-system-a"]
+	path = viewzavr-system-a
+	url = git@github.com:/viewzavr/viewzavr-system-a

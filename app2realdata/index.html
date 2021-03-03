@@ -9,14 +9,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="../app1/pwa/current.png">
   <link rel="apple-touch-icon" sizes="167x167" href="../app1/pwa/current.png"> 
   
-  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code/depends/jquery-2.1.4.js"></script>
+  <script src="/viewzavr-system-a/lib/viewlang/code/depends/jquery-2.1.4.js"></script>
 
-  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/parser.js"></script>
-  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/process.js"></script>
-  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/import.js"></script>
-  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/qtcore.js"></script>
+  <script src="/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/parser.js"></script>
+  <script src="/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/process.js"></script>
+  <script src="/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/import.js"></script>
+  <script src="/viewzavr-system-a/lib/viewlang/code//depends/qmlweb/src/qtcore.js"></script>
 
-  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//base.js"></script>
+  <script src="/viewzavr-system-a/lib/viewlang/code//base.js"></script>
   <link rel="stylesheet" href="./style.css">
 <head>
 </head>
@@ -83,7 +83,7 @@
   body { margin: 0; }
   </style>
 
-  <script src="//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code//threejs_driver/init.js"></script>
+  <script src="/viewzavr-system-a/lib/viewlang/code//threejs_driver/init.js"></script>
   
   <script> renderer.setClearColor( 0xFFFFFF, 1); </script>  
 
@@ -91,20 +91,20 @@
 
     ///////////////////////////// qmlweb and viewlang (required for viewzavr-system-a implementation)
     
-    import * as Viewlang from "//viewzavr.com/apps/viewzavr-system-a/lib/viewlang/code/embed2/init.js"
+    import * as Viewlang from "/viewzavr-system-a/lib/viewlang/code/embed2/init.js"
     window.qmlEngine = new QMLEngine( document.getElementById( "qmlSpace" ) );
     Viewlang.setup_qmlweb( qmlEngine );
     
     ///////////////////////////// viewzavr
     
-    import * as Viewzavr from "//viewzavr.com/apps/viewzavr-system-a/lib/viewzavr-core/init.js";
+    import * as Viewzavr from "/viewzavr-system-a/lib/viewzavr-core/init.js";
 
     var vz = Viewzavr.create();
     // window.vz = vz;
     
     //////////////////////////// player
     
-    import * as Player from "//viewzavr.com/apps/viewzavr-system-a/player/init.js";
+    import * as Player from "/viewzavr-system-a/player/init.js";
     var vzPlayer = Player.create( vz, qmlEngine );
     window.vzPlayer = vzPlayer;
     
@@ -114,11 +114,11 @@
     renderer.setClearColor( 0xFFFFFF, 1);
     
     //////////////////////////// graphical api
-    import * as VisAPI from "//viewzavr.com/apps/viewzavr-system-a/graphical-api/init.js";
+    import * as VisAPI from "/viewzavr-system-a/graphical-api/init.js";
     VisAPI.setup( vz );
 
     //////////////////////////// library-one
-    import * as lib1 from "//viewzavr.com/apps/viewzavr-system-a/lib/library-one/init.js";
+    import * as lib1 from "/viewzavr-system-a/lib/library-one/init.js";
     lib1.setup( vz, vzPlayer );
 
     //////////////////////////// load user script
@@ -126,7 +126,7 @@
       // use this logic if you want to load app files defined in parameter.
       var userurl = getParameterByName("src");
       if (!userurl) userurl = vz.getDir( import.meta.url ) + "./app.js";
-      // var userurl = vz.getDir( import.meta.url ) + "//viewzavr.com/apps/viewzavr-system-a/app.js";
+      // var userurl = vz.getDir( import.meta.url ) + "/viewzavr-system-a/app.js";
 
       console.log("user script url=",userurl );
 
