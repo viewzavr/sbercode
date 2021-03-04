@@ -1,5 +1,7 @@
 // вход параметр массив метрик. по нему обращение к.
 
+import * as FIL from "./files.js";
+
 export function setup( vz ) {
   vz.addItemType( "zoo-mass-loader","ZOO: загрузчик многих метрик", function( opts ) {
     return create( vz, opts );
@@ -66,7 +68,7 @@ https://sber-metrics.*.com/metrics-data?
       // courl = "/m2.json";
       // вот тут то и ага
     
-      loadFile( courl,function(res) { // viewlang's func
+      FIL.loadFile( courl,function(res) { // viewlang's func
          var metric_data;
          
          try {

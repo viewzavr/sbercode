@@ -1,6 +1,8 @@
 // Загружает индексный файл метрик, объявляет все найденные метрики своими параметрами
 // после чего другие модули могут к ним линковаться (addParamRef) т.е. работает тема Формула
 
+import * as FIL from "./files.js";
+
 export function setup( vz ) {
   vz.addItemType( "zoo-json-metrics-list","ZOO: список метрик json", function( opts ) {
     return create( vz, opts );
@@ -13,7 +15,7 @@ export function create( vz, opts ) {
   var obj = vz.createObj( opts );
   obj.addFile("file","https://sber-metrics.viewzavr.com/metrics",function(v) {
     datadir = vz.getDir( v );
-    loadFile( v,function(res) { // viewlang's func
+    FIL.loadFile( v,function(res) { // viewlang's func
       obj.assignData( JSON.parse(res).msg );
     },
     function(err) {
